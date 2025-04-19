@@ -13,13 +13,12 @@ export const createPost = async (req, res) => {
       return res.status(403).json({ message: "Only NGOs can create posts" });
     }
 
-    const { title, description, type, goalAmount, volunteersRequired } = req.body;
+    const { title, description, goalAmount, volunteersRequired } = req.body;
 
     const newPost = new Post({
       ngo: ngoId,
       title,
       description,
-      type,
       goalAmount,
       volunteersRequired,
     });
