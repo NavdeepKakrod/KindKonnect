@@ -10,10 +10,6 @@ const postSchema = new mongoose.Schema({
   }, 
   description:{
     type: String,
-  }, 
-  type: { 
-    type: String, 
-    enum: ['donation', 'volunteer'] 
   },
   goalAmount: { 
     type: Number 
