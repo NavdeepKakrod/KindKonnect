@@ -1,4 +1,4 @@
-# 🌱 KindKonnect
+# 🌱 KindKonnect 
 
 **Your social bridge between kindness and impact.**
 
@@ -77,7 +77,7 @@ git clone https://github.com/yourusername/kindkonnect.git
 
 # Navigate to the frontend
 cd frontend
-npm install![image](https://github.com/user-attachments/assets/b4e29e4a-6dd6-46f4-b42f-0317a6340f7b)
+npm install
 
 cd backend
 npm install
@@ -98,8 +98,9 @@ npm run start
 Open to contributions! If you'd like to enhance this project or use it for social good, feel free to fork and PR.
 
 ## Made with 💚 by
-[Navdeep](https://github.com/NavdeepKakrod)
-[Ashkrit](https://github.com/Askme007)
-[Abhishek](https://github.com/akabhi2311)
-[Shashwat](https://github.com/shashwat)
-    **“Kindness is free. Let’s make it accessible.” — KindKonnect**
+- [Navdeep](https://github.com/NavdeepKakrod)
+- [Ashkrit](https://github.com/Askme007)
+- [Abhishek](https://github.com/akabhi2311)
+- [Shashwat](https://github.com/shashwat)
+
+# **“Kindness is free. Let’s make it accessible.” — KindKonnect**
