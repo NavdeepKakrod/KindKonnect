@@ -1,9 +1,9 @@
-#🌱 KindKonnect
+# 🌱 KindKonnect
 
 
-A platform that bridges NGOs with people who want to make a difference. NGOs can register, post donation or volunteer campaigns, and users can support these causes directly through our platform.
+### A platform that bridges NGOs with people who want to make a difference. NGOs can register, post donation or volunteer campaigns, and users can support these causes directly through our platform.
 
-📌 Features :: 
+## 📌 Features :: 
 
     1. 🔐 NGO/Organisation & User Registration/Login (JWT-based)
 
@@ -17,12 +17,12 @@ A platform that bridges NGOs with people who want to make a difference. NGOs can
 
     6. 📂 Secure and role-based access
 
-🧩 Tech Stack
+## 🧩 Tech Stack
 
-Frontend :: React.js , Tailwind CSS
+	Frontend :: React.js , Tailwind CSS
 
-Backend :: Node.js + Express , JWT for Auth
+	Backend :: Node.js + Express , JWT for Auth
 	
-Database :: MongoDB Atlas , Mongoose
+	Database :: MongoDB Atlas , Mongoose
 
-Other Integrations :: Razorpay/Stripe (donation) , Cloudinary (optional for images)
+	Other Integrations :: Razorpay/Stripe (donation) , Cloudinary (optional for images)
