@@ -63,10 +63,10 @@ In a world full of compassion, there exists a gap between those who **need help*
 
 ---
 
-## 📸 Screenshots (Coming Soon)
+## 📸 Screenshots 
+![webapp](https://github.com/user-attachments/assets/5e2e121c-670a-4d9c-a755-06bf67a898d7)
 
-_Add screenshots of key pages like Home, Campaign Page, Dashboard, etc._
-
+![webapp](https://github.com/user-attachments/assets/d97ddadf-e4e0-4fed-af4f-51416f8ce82a)
 ---
 
 ## 🛠️ Setup & Installation
@@ -77,10 +77,8 @@ git clone https://github.com/yourusername/kindkonnect.git
 
 # Navigate to the frontend
 cd frontend
-npm install
-npm run dev
+npm install![image](https://github.com/user-attachments/assets/b4e29e4a-6dd6-46f4-b42f-0317a6340f7b)
 
-# Navigate to the backend
 cd backend
 npm install
 npm run start
