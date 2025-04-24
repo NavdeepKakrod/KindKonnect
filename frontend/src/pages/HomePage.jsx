@@ -4,12 +4,55 @@ import axios from 'axios';
 const NGOPosts = () => {
   const [posts, setPosts] = useState([]);
 
-  useEffect(() => {
+  const fetchPosts = () => {
     axios
       .get("http://localhost:5000/api/post/get")
       .then((res) => setPosts(res.data))
       .catch((err) => console.error(err));
+  };
+
+  useEffect(() => {
+    fetchPosts();
   }, []);
+
+  const handleDonate = async (postId) => {
+    const token = localStorage.getItem("userToken") || localStorage.getItem("ngoToken");
+    if (!token) return alert("Please log in to donate.");
+
+    const amount = prompt("Enter donation amount (₹):");
+    if (!amount || isNaN(amount)) return alert("Please enter a valid amount.");
+
+    try {
+      await axios.post(
+        "http://localhost:5000/api/post/donate",
+        { postId, amount: Number(amount) },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert("Donation successful!");
+      fetchPosts();
+    } catch (err) {
+      console.error("Donation error:", err.response || err.message);
+      alert(err?.response?.data?.message || "Donation failed. Please try again.");
+    }
+  };
+
+  const handleVolunteer = async (postId) => {
+    const token = localStorage.getItem("userToken"); // ✅ Only users allowed
+    if (!token) return alert("Only users can volunteer. Please log in as a user.");
+
+    try {
+      await axios.post(
+        "http://localhost:5000/api/post/volunteer",
+        { postId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      alert("Successfully volunteered!");
+      fetchPosts();
+    } catch (err) {
+      console.error("Volunteer error:", err.response || err.message);
+      alert(err?.response?.data?.message || "Could not volunteer.");
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-900 text-white py-10 px-6">
@@ -38,10 +81,16 @@ const NGOPosts = () => {
             </div>
 
             <div className="mt-6 flex gap-3">
-              <button className="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+              <button
+                className="flex-1 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
+                onClick={() => handleDonate(post._id)}
+              >
                 Donate
               </button>
-              <button className="flex-1 border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-100 transition">
+              <button
+                className="flex-1 border border-blue-600 text-blue-600 px-4 py-2 rounded hover:bg-blue-100 transition"
+                onClick={() => handleVolunteer(post._id)}
+              >
                 Volunteer
               </button>
             </div>

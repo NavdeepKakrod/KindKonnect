@@ -50,6 +50,7 @@ export const loginNGO = async (req, res) => {
     if (!isMatch) return res.status(400).json({ msg: 'Invalid credentials' });
 
     const token = generateToken(ngo._id, 'ngo');
+    
     res.status(200).json({ token, ngo });
 
   } 

@@ -26,6 +26,10 @@ const ngoSchema = new mongoose.Schema({
   description: {
     type:String
   },
+  donatedPosts: [{
+          post: { type: mongoose.Schema.Types.ObjectId, ref: 'Post' },
+          amount: Number,
+  }],
   isVerified: { 
     type: Boolean, 
     default: false 

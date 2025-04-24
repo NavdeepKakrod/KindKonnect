@@ -12,30 +12,71 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-blue-600 text-white p-4 flex justify-between items-center shadow">
-      <h1 className="text-lg font-bold">
-        <Link to="/">NGO Connect</Link>
+    <nav className="bg-blue-600 text-white px-6 py-4 shadow-md flex justify-between items-center">
+      <h1 className="text-xl sm:text-2xl font-bold tracking-wide">
+        <Link to="/" className="hover:text-gray-100 transition">NGO Connect</Link>
       </h1>
 
-      <div className="space-x-4">
+      <div className="flex flex-wrap items-center gap-3 text-sm sm:text-base">
         {ngoToken ? (
           <>
-            <span>Welcome, {ngoInfo?.name}</span>
-            <Link to="/ngo/dashboard" className="hover:underline">My Posts</Link>
-            <Link to="/createpost" className="hover:underline">Create Post</Link>
-            <button onClick={handleLogout} className="hover:underline">Logout</button>
+            <span className="text-white font-semibold hidden sm:block">
+              Welcome, {ngoInfo?.name}
+            </span>
+            <Link
+              to="/createpost"
+              className="bg-white text-blue-600 px-4 py-2 rounded-xl font-semibold hover:bg-gray-100 transition"
+            >
+              Create Post
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-xl font-semibold text-white transition"
+            >
+              Logout
+            </button>
           </>
         ) : userToken ? (
           <>
-            <Link to="/dashboard" className="hover:underline">Feed</Link>
-            <button onClick={handleLogout} className="hover:underline">Logout</button>
+            <Link
+              to="/dashboard"
+              className="bg-white text-blue-600 px-4 py-2 rounded-xl font-semibold hover:bg-gray-100 transition"
+            >
+              Feed
+            </Link>
+            <button
+              onClick={handleLogout}
+              className="bg-red-500 hover:bg-red-600 px-4 py-2 rounded-xl font-semibold text-white transition"
+            >
+              Logout
+            </button>
           </>
         ) : (
           <>
-            <Link to="/login/user" className="hover:underline">User Login</Link>
-            <Link to="/login/ngo" className="hover:underline">NGO Login</Link>
-            <Link to="/reg/user" className="hover:underline">User Register</Link>
-            <Link to="/reg/ngo" className="hover:underline">NGO Register</Link>
+            <Link
+              to="/login/user"
+              className="bg-white text-blue-600 px-4 py-2 rounded-xl font-semibold hover:bg-gray-100 transition"
+            >
+              User Login
+            </Link>
+            <Link
+              to="/login/ngo"
+              className="bg-white text-blue-600 px-4 py-2 rounded-xl font-semibold hover:bg-gray-100 transition"
+            >
+              NGO Login
+            </Link>
+            <Link
+              to="/reg/user"
+              className="bg-white text-blue-600 px-4 py-2 rounded-xl font-semibold hover:bg-gray-100 transition"
+            >
+              User Register
+            </Link>
+            <Link
+              to="/reg/ngo"
+              className="bg-white text-blue-600 px-4 py-2 rounded-xl font-semibold hover:bg-gray-100 transition"
+            >
+              NGO Register
+            </Link>
           </>
         )}
       </div>

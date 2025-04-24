@@ -22,7 +22,7 @@ const LoginNGO = () => {
       const res = await axios.post("http://localhost:5000/api/auth/login/ngo", formData);
       localStorage.setItem("ngoToken", res.data.token);
       localStorage.setItem("ngoInfo", JSON.stringify(res.data.ngo));
-      navigate("/createpost"); // redirect to dashboard or any protected route
+      navigate("/ngo/dashboard"); // redirect to dashboard or any protected route
     } catch (err) {
       console.error("Login error:", err);
       if (err.response) {
