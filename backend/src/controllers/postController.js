@@ -13,7 +13,7 @@ export const createPost = async (req, res) => {
       return res.status(403).json({ message: "Only NGOs can create posts" });
     }
 
-    const { title, description, goalAmount, volunteersRequired } = req.body;
+    const { title, description, goalAmount, volunteersRequired , image} = req.body;
 
     const newPost = new Post({
       ngo: ngoId,
@@ -21,6 +21,7 @@ export const createPost = async (req, res) => {
       description,
       goalAmount,
       volunteersRequired,
+      image
     });
 
     const savedPost = await newPost.save();
@@ -127,5 +128,55 @@ export const volunteerForPost = async (req, res) => {
   } catch (err) {
     console.log("Error in volunteerForPost controller", err.message);
     res.status(500).json({ message: "Internal server Error" });
+  }
+};
+
+export const commentOnPost = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { postId, commentText } = req.body;
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(400).json({ message: "Post not found" });
+    }
+
+    const comment = {
+      user: userId,
+      text: commentText,
+      createdAt: new Date(),
+    };
+
+    post.comments.push(comment);
+    await post.save();
+
+    res.status(200).json({ message: "Comment added successfully", updatedPost: post });
+  } catch (err) {
+    console.log("Error in commentOnPost controller", err.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
+
+export const likePost = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const { postId } = req.body;
+
+    const post = await Post.findById(postId);
+    if (!post) {
+      return res.status(400).json({ message: "Post not found" });
+    }
+
+    if (post.likes.includes(userId)) {
+      return res.status(400).json({ message: "Already liked this post" });
+    }
+
+    post.likes.push(userId);
+    await post.save();
+
+    res.status(200).json({ message: "Post liked successfully", updatedPost: post });
+  } catch (err) {
+    console.log("Error in likePost controller", err.message);
+    res.status(500).json({ message: "Internal Server Error" });
   }
 };

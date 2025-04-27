@@ -6,6 +6,20 @@ const CreatePostPage = () => {
   const [description, setDescription] = useState("");
   const [goalAmount, setGoalAmount] = useState(0);
   const [volunteersRequired, setVolunteersRequired] = useState(0);
+  const [image, setImage] = useState("");
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+      setImage(reader.result);  
+    };
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,10 +29,10 @@ const CreatePostPage = () => {
       description,
       goalAmount,
       volunteersRequired,
+      image,  
     };
 
     try {
-      // Correct token key used here
       const token = localStorage.getItem("ngoToken");
       if (!token) {
         alert("No token found. Please login.");
@@ -34,6 +48,13 @@ const CreatePostPage = () => {
 
       alert("Post created successfully!");
       console.log(res.data);
+       
+      setTitle("");
+      setDescription("");
+      setGoalAmount(0);
+      setVolunteersRequired(0);
+      setImage("");
+
     } catch (err) {
       console.error("Error creating post:", err.response?.data || err.message);
       alert(err.response?.data?.message || "Failed to create post");
@@ -76,6 +97,13 @@ const CreatePostPage = () => {
         onChange={(e) => setVolunteersRequired(e.target.value)}
         placeholder="Volunteers Required"
         required
+        className="w-full mb-4 p-2 border border-gray-300 rounded"
+      />
+
+      <input
+        type="file"
+        accept="image/*"
+        onChange={handleImageChange}
         className="w-full mb-6 p-2 border border-gray-300 rounded"
       />
 
