@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const NGOPosts = () => {
   const [posts, setPosts] = useState([]);
+  const [showComments, setShowComments] = useState({}); // 👈 for toggling comments per post
 
   const fetchPosts = () => {
     axios
@@ -57,7 +58,7 @@ const NGOPosts = () => {
   };
 
   const handleLike = async (postId) => {
-    const token = localStorage.getItem("userToken") || localStorage.getItem("ngoToken");
+    const token = getToken();
     if (!token) return alert("Please log in to like posts.");
   
     try {
@@ -75,7 +76,7 @@ const NGOPosts = () => {
   };
   
   const handleComment = async (postId) => {
-    const token = localStorage.getItem("userToken") || localStorage.getItem("ngoToken");
+    const token = getToken();
     if (!token) return alert("Please log in to comment.");
   
     const commentText = prompt("Enter your comment:");
@@ -94,7 +95,14 @@ const NGOPosts = () => {
       alert(err?.response?.data?.message || "Could not add comment.");
     }
   };
-  
+
+  const toggleComments = (postId) => {
+    setShowComments((prev) => ({
+      ...prev,
+      [postId]: !prev[postId],
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white py-10 px-6">
       <h1 className="text-4xl font-bold mb-10">Latest NGO Posts</h1>
@@ -106,13 +114,13 @@ const NGOPosts = () => {
             className="bg-white text-gray-800 p-6 rounded-xl shadow-lg flex flex-col justify-between"
           >
             <div>
-            {post.image && (
-              <img
-                src={post.image}
-                alt="Post"
-                className="w-full h-48 object-cover rounded-md mb-4"
-              />
-            )}
+              {post.image && (
+                <img
+                  src={post.image}
+                  alt="Post"
+                  className="w-full h-48 object-cover rounded-md mb-4"
+                />
+              )}
               <p className="text-sm font-medium text-blue-600 mb-1">
                 {post.ngo?.name}
               </p>
@@ -156,17 +164,33 @@ const NGOPosts = () => {
               </button>
             </div>
 
-            {/* Show comments */}
+            {/* Toggle Comments Button */}
             <div className="mt-4">
-              <h4 className="font-semibold">Comments:</h4>
-              <ul className="mt-2 space-y-1 text-sm text-gray-700">
-                {post.comments?.map((c, index) => (
-                  <li key={index} className="border-b pb-1">
-                    {c.text}
-                  </li>
-                ))}
-              </ul>
+              <button
+                className="text-blue-600 underline text-sm"
+                onClick={() => toggleComments(post._id)}
+              >
+                {showComments[post._id] ? 'Hide Comments' : 'View Comments'}
+              </button>
+
+              {showComments[post._id] && (
+                <div className="mt-2">
+                  <h4 className="font-semibold">Comments:</h4>
+                  <ul className="mt-2 space-y-1 text-sm text-gray-700">
+                    {post.comments?.length > 0 ? (
+                      post.comments?.map((c, index) => (
+                        <li key={index} className="border-b pb-1">
+                          <strong>{c.user?.name || c.ngo?.name || "Anonymous"}:</strong> {c.text}
+                        </li>
+                      ))
+                    ) : (
+                      <li>No comments yet.</li>
+                    )}
+                  </ul>
+                </div>
+              )}
             </div>
+
           </div>
         ))}
       </div>

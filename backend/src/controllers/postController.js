@@ -36,22 +36,30 @@ export const createPost = async (req, res) => {
  
 export const getAllPosts = async (req, res) => {
   try {
+    const posts = await Post.find()
+      .populate("ngo", "name")
+      .populate("comments.user", "name email")    
+      .populate("comments.ngo", "name")
+      .exec();
 
-    const posts = await Post.find().populate("ngo", "name email");
     res.status(200).json(posts);
-
   } 
   catch (err) {
     console.log("Error in getpost controller", err.message);
-    res.status(500).json({ message : "Internal server Error "});
+    res.status(500).json({ message: "Internal server Error" });
   }
 };
+
 
 export const getMyPosts = async (req, res) => {
   try {
     const ngoId = req.user.id;
 
-    const posts = await Post.find({ ngo: ngoId }).populate("ngo", "name email");
+    const posts = await Post.find({ ngo: ngoId })
+    .populate("ngo", "name")
+    .populate("comments.user", "name email")    
+    .populate("comments.ngo", "name")
+    .exec();
 
     res.status(200).json(posts);
   } catch (err) {
@@ -133,29 +141,33 @@ export const volunteerForPost = async (req, res) => {
 
 export const commentOnPost = async (req, res) => {
   try {
-    const userId = req.user.id;
     const { postId, commentText } = req.body;
-
     const post = await Post.findById(postId);
     if (!post) {
-      return res.status(400).json({ message: "Post not found" });
+      return res.status(404).json({ message: "Post not found" });
     }
 
     const comment = {
-      user: userId,
       text: commentText,
       createdAt: new Date(),
     };
 
+    if (req.user.role === "ngo") {
+      comment.ngo = req.user.id;
+    } else {
+      comment.user = req.user.id;
+    }
+
     post.comments.push(comment);
     await post.save();
 
-    res.status(200).json({ message: "Comment added successfully", updatedPost: post });
+    res.status(200).json({ message: "Comment added successfully" });
   } catch (err) {
-    console.log("Error in commentOnPost controller", err.message);
-    res.status(500).json({ message: "Internal Server Error" });
+    console.error("Error in commentOnPost:", err.message);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
+
 
 export const likePost = async (req, res) => {
   try {

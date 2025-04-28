@@ -3,7 +3,8 @@ import axios from "axios";
 
 const NGODashboard = () => {
   const [posts, setPosts] = useState([]);
-  const [viewType, setViewType] = useState("my"); 
+  const [viewType, setViewType] = useState("my");
+  const [showComments, setShowComments] = useState({}); // new state for toggling comments
 
   const fetchPosts = () => {
     const token = localStorage.getItem("ngoToken");
@@ -107,6 +108,13 @@ const NGODashboard = () => {
     }
   };
 
+  const toggleComments = (postId) => {
+    setShowComments((prev) => ({
+      ...prev,
+      [postId]: !prev[postId],
+    }));
+  };
+
   return (
     <div className="min-h-screen bg-gray-900 text-white py-10 px-6">
       <div className="max-w-6xl mx-auto">
@@ -158,11 +166,11 @@ const NGODashboard = () => {
                   {/* Post Image */}
                   {post.image && (
                     <img
-                    src={post.image}
-                    alt="Post"
-                    className="w-full h-48 object-cover rounded-md mb-4"
-                  />
-                )}
+                      src={post.image}
+                      alt="Post"
+                      className="w-full h-48 object-cover rounded-md mb-4"
+                    />
+                  )}
 
                   <h2 className="text-2xl font-bold">{post.title}</h2>
                   <p className="mt-2 text-sm text-gray-600">{post.description}</p>
@@ -206,17 +214,25 @@ const NGODashboard = () => {
                   </div>
                 )}
 
-                {/* Comments */}
+                {/* Comments Section */}
                 {post.comments && post.comments.length > 0 && (
                   <div className="mt-4">
-                    <h4 className="font-semibold">Comments:</h4>
-                    <ul className="mt-2 space-y-1 text-sm text-gray-700">
-                      {post.comments.map((c, index) => (
-                        <li key={index} className="border-b pb-1">
-                          {c.text}
-                        </li>
-                      ))}
-                    </ul>
+                    <button
+                      className="text-sm text-blue-600 underline"
+                      onClick={() => toggleComments(post._id)}
+                    >
+                      {showComments[post._id] ? "Hide Comments" : "View Comments"}
+                    </button>
+
+                    {showComments[post._id] && (
+                      <ul className="mt-2 space-y-1 text-sm text-gray-700">
+                        {post.comments.map((c, index) => (
+                          <li key={index} className="border-b pb-1">
+                            <strong>{c.user?.name ||c.ngo?.name || "Anonymous"}:</strong> {c.text}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
                 )}
               </div>
