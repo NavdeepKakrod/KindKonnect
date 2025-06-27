@@ -69,7 +69,7 @@ In a world full of compassion, there exists a gap between those who **need help*
 ![webapp](https://github.com/user-attachments/assets/d97ddadf-e4e0-4fed-af4f-51416f8ce82a)
 ---
 
-## 🛠Setup & Installation
+## Setup & Installation
 
 ```bash
 # Clone the repo
@@ -101,6 +101,6 @@ Open to contributions! If you'd like to enhance this project or use it for socia
 - [Navdeep](https://github.com/NavdeepKakrod)
 - [Ashkrit](https://github.com/Askme007)
 - [Abhishek](https://github.com/akabhi2311)
-- [Shashwat](https://github.com/shashwat)
+- [Shashwat](https://github.com/Ashme007)
 
 # **“Kindness is free. Let’s make it accessible.” — KindKonnect**
