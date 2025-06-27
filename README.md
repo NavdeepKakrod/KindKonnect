@@ -1,4 +1,4 @@
-# 🌱 KindKonnect 
+# KindKonnect 
 
 **Your social bridge between kindness and impact.**
 
@@ -6,42 +6,42 @@ KindKonnect is a social media platform built to connect **NGOs** and **changemak
 
 ---
 
-## 🔥 Inspiration
+## Inspiration
 
 In a world full of compassion, there exists a gap between those who **need help** and those who are **willing to help**. KindKonnect is built to bridge that gap by offering a dedicated space where NGOs and real changemakers can post genuine issues and campaigns, and users can explore, connect, and contribute — be it via donations or active volunteering.
 
 ---
 
-## 🚀 Features
+## Features
 
-### 👥 Authentication & Authorization
+### Authentication & Authorization
 - JWT-based secure **registration and login** for NGOs and users.
 - **Role-based access control** ensures platform safety and integrity.
 
-### 📢 Campaign Posting
+### Campaign Posting
 - NGOs and verified individuals can **create campaigns**:
-  - 💸 **Donation Campaigns**
-  - 🧑‍🤝‍🧑 **Volunteer Initiatives**
+  - **Donation Campaigns**
+  - **Volunteer Initiatives**
 
-### 💳 Donations & Volunteering
+### Donations & Volunteering
 - Users can:
   - Donate securely via **Razorpay or Stripe**.
   - Apply to volunteer and help physically or virtually.
 
-### 📊 NGO Dashboard
+### NGO Dashboard
 - NGOs/Organisations get access to a personalized dashboard to:
   - Manage their campaigns
   - Track donations
   - Monitor volunteer responses
 
-### 🔐 Security & Trust
+### Security & Trust
 - Verified profiles
 - Role-based access to prevent misuse
 - All payments processed via trusted gateways
 
 ---
 
-## 🧠 Use Cases
+## Use Cases
 
 - **NGOs** want to spread awareness and gather support for causes.
 - **Social workers** seek volunteers for on-ground help.
@@ -50,7 +50,7 @@ In a world full of compassion, there exists a gap between those who **need help*
 
 ---
 
-## 🧩 Tech Stack
+## Tech Stack
 
 | Layer      | Tech |
 |------------|------|
@@ -63,13 +63,13 @@ In a world full of compassion, there exists a gap between those who **need help*
 
 ---
 
-## 📸 Screenshots 
+## Screenshots 
 ![webapp](https://github.com/user-attachments/assets/5e2e121c-670a-4d9c-a755-06bf67a898d7)
 
 ![webapp](https://github.com/user-attachments/assets/d97ddadf-e4e0-4fed-af4f-51416f8ce82a)
 ---
 
-## 🛠️ Setup & Installation
+## 🛠Setup & Installation
 
 ```bash
 # Clone the repo
@@ -83,7 +83,7 @@ cd backend
 npm install
 npm run start
 ```
-## 📅 Roadmap (Post Hackathon)
+## Roadmap (Post Hackathon)
 
 - ✅ Campaign management
 - ✅ Razorpay/Stripe integration
@@ -93,7 +93,7 @@ npm run start
 - 🔲 Mobile app support (React Native)
 - 🔲 Analytics and reporting for NGOs
 
-## 🤝 Contributing
+## Contributing
 
 Open to contributions! If you'd like to enhance this project or use it for social good, feel free to fork and PR.
 
